@@ -1,0 +1,123 @@
+package ShootingGame;
+
+import java.awt.Button;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.*;
+ 
+public class Test extends game_Frame {
+    private Frame mainFrame;
+    private Label headerLabel;
+    private Label statusLabel;
+    private Panel controlPanel;
+ 
+    public Test() {
+        prepareGUI();
+    }
+ 
+    public static void main(String[] args) {
+        Test awtControlDemo = new Test();
+        awtControlDemo.showButton();
+    }
+    
+	public void start() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addKeyListener(this);
+
+		th = new Thread(this);
+		th.start();
+	}
+
+ 
+    private void prepareGUI() {
+        // Frame 에 대한 셋팅
+        mainFrame = new Frame("Java AWT 샘플");
+        mainFrame.setSize(400, 400);
+        mainFrame.setLayout(new GridLayout(3, 1));
+        mainFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent) {
+                System.exit(0);
+            }
+        });
+ 
+        // 상단에 있는 라벨
+        headerLabel = new Label();
+        headerLabel.setAlignment(Label.CENTER);
+        headerLabel.setText("Control Test : Button");
+ 
+        // 하단 상태값 라벨
+        statusLabel = new Label();
+        statusLabel.setText("Status Lable");
+        statusLabel.setAlignment(Label.CENTER);
+        statusLabel.setSize(350, 100);
+ 
+        controlPanel = new Panel();
+        controlPanel.setLayout(new FlowLayout());
+ 
+        mainFrame.add(headerLabel);
+        mainFrame.add(controlPanel);
+        mainFrame.add(statusLabel);
+        mainFrame.setVisible(true);
+    }
+ 
+    void showButton() {
+ 
+        Button Lv1 = new Button("Level 1");
+        Button Lv2 = new Button("Level 2");
+        Button Lv3 = new Button("Level 3");
+ 
+        Lv1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+        		game_Score = 0;// 게임 스코어 초기화
+        		player_Hitpoint = 10;// 최초 플레이어 체력
+        		player_Speed = 7; // 유저 캐릭터 움직이는 속도 설정
+        		missile_Speed = 13; // 미사일 움직임 속도 설정
+        		fire_Speed = 18; // 미사일 연사 속도 설정
+        		enemy_speed = 7;// 적이 날라오는 속도 설정
+        		
+        		start();
+            }
+        });
+ 
+        Lv2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	game_Score = 0;// 게임 스코어 초기화
+        		player_Hitpoint = 5;// 최초 플레이어 체력
+        		player_Speed = 6; // 유저 캐릭터 움직이는 속도 설정
+        		missile_Speed = 11; // 미사일 움직임 속도 설정
+        		fire_Speed = 15; // 미사일 연사 속도 설정
+        		enemy_speed = 8;// 적이 날라오는 속도 설정
+        		
+        		start();
+            }
+        });
+ 
+        Lv3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	game_Score = 0;// 게임 스코어 초기화
+        		player_Hitpoint = 3;// 최초 플레이어 체력
+        		player_Speed = 4; // 유저 캐릭터 움직이는 속도 설정
+        		missile_Speed = 9; // 미사일 움직임 속도 설정
+        		fire_Speed = 10; // 미사일 연사 속도 설정
+        		enemy_speed = 9;// 적이 날라오는 속도 설정
+        		
+        		start();
+            }
+        });
+ 
+        controlPanel.add(Lv1);
+        controlPanel.add(Lv2);
+        controlPanel.add(Lv3);
+ 
+        mainFrame.setVisible(true);
+ 
+    }
+}
